@@ -41,6 +41,22 @@ export const createpostAction = createAsyncThunk(
   }
 );
 
+//fetch all posts
+export const fetchPostsAction = createAsyncThunk(
+  "post/list",
+  async (category, { rejectWithValue, getState, dispatch }) => {
+    try {
+      const { data } = await axios.get(
+        `${baseUrl}/api/posts?category=${category}`
+      );
+      return data;
+    } catch (error) {
+      if (!error?.response) throw error;
+      return rejectWithValue(error?.response?.data);
+    }
+  }
+);
+
 //slice
 const postSlice = createSlice({
   name: "post",
