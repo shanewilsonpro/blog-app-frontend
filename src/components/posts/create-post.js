@@ -5,7 +5,7 @@ import { Redirect } from "react-router-dom";
 import styled from "styled-components";
 import { useDispatch, useSelector } from "react-redux";
 import { createpostAction } from "../../redux/slices/posts/postSlices";
-import CategoryDropDown from "../Categories/category-dropdown";
+import CategoryDropDown from "../categories/category-dropdown";
 
 //Form schema
 const formSchema = Yup.object({
@@ -151,7 +151,7 @@ export default function CreatePost() {
                 <Container className="container bg-gray-700">
                   <Dropzone
                     onBlur={formik.handleBlur("image")}
-                    accept="image/jpeg, image/png"
+                    accept="image/jpeg,image/png,image/jpg,image/gif"
                     onDrop={(acceptedFiles) => {
                       formik.setFieldValue("image", acceptedFiles[0]);
                     }}
