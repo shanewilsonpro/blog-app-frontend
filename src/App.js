@@ -12,6 +12,7 @@ import CreatePost from "./components/posts/create-post";
 import PostsList from "./components/posts/posts-list";
 import PostDetails from "./components/posts/post-details";
 import UpdatePost from "./components/posts/update-post";
+import UpdateComment from "./components/comments/update-comment";
 
 function App() {
   return (
@@ -30,6 +31,11 @@ function App() {
           exact
           path="/update-post/:id"
           component={UpdatePost}
+        />
+        <PrivateProtectRoute
+          exact
+          path="/update-comment/:id"
+          component={UpdateComment}
         />
         <Route exact path="/posts" component={PostsList} />
         <Route exact path="/posts/:id" component={PostDetails} />

@@ -8,6 +8,8 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import DateFormatter from "../../utils/date-formatter";
 import LoadingComponent from "../../utils/loading-component";
+import AddComment from "../Comments/add-comment";
+import CommentsList from "../Comments/comments-list";
 
 const PostDetails = ({
   match: {
@@ -104,6 +106,11 @@ const PostDetails = ({
                 </p>
               </div>
             </div>
+          </div>
+          {/* Add comment Form component here */}
+          {userAuth ? <AddComment postId={id} /> : null}
+          <div className="flex justify-center  items-center">
+            <CommentsList comments={postDetails?.comments} />
           </div>
         </section>
       )}
