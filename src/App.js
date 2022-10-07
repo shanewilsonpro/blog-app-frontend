@@ -16,6 +16,7 @@ import UpdateComment from "./components/comments/update-comment";
 import Profile from "./components/users/profile/profile";
 import UploadProfilePhoto from "./components/users/profile/upload-profile-photo";
 import UpdateProfileForm from "./components/users/profile/update-profile-form";
+import SendEmail from "./components/users/emailing/send-email";
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
           path="/update-profile/:id"
           component={UpdateProfileForm}
         />
+        <PrivateProtectRoute exact path="/send-mail" component={SendEmail} />
         <PrivateProtectRoute exact path="/profile/:id" component={Profile} />
         <PrivateProtectRoute exact path="/create-post" component={CreatePost} />
         <PrivateProtectRoute

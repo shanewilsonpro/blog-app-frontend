@@ -39,6 +39,17 @@ export default function Profile(props) {
     dispatch(userProfileAction(id));
   }, [id, dispatch, followed, unFollowed]);
 
+  //send mail handle click
+  const sendMailNavigate = () => {
+    history.push({
+      pathname: "/send-mail",
+      state: {
+        email: profile?.email,
+        id: profile?._id,
+      },
+    });
+  };
+
   //isLogin
   const isLoginUser = userAuth?._id === profile?._id;
 
@@ -188,7 +199,10 @@ export default function Profile(props) {
                                 )}
                               </>
                               {/* Send Mail */}
-                              <button className="inline-flex justify-center bg-indigo-900 px-4 py-2 border border-yellow-700 shadow-sm text-sm font-medium rounded-md text-gray-700  hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
+                              <button
+                                onClick={sendMailNavigate}
+                                className="inline-flex justify-center bg-indigo-900 px-4 py-2 border border-yellow-700 shadow-sm text-sm font-medium rounded-md text-gray-700  hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
+                              >
                                 <MailIcon
                                   className="-ml-1 mr-2 h-5 w-5 text-gray-200"
                                   aria-hidden="true"
