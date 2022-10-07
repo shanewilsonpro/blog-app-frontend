@@ -7,7 +7,11 @@ import {
   UserIcon,
 } from "@heroicons/react/outline";
 import { MailIcon, EyeIcon } from "@heroicons/react/solid";
-import { userProfileAction } from "../../../redux/slices/users/usersSlices";
+import {
+  userProfileAction,
+  followUserAction,
+  unfollowUserAction,
+} from "../../../redux/slices/users/usersSlices";
 import { useDispatch, useSelector } from "react-redux";
 import DateFormatter from "../../../utils/date-formatter";
 import LoadingComponent from "../../../utils/loading-component";
@@ -24,6 +28,8 @@ export default function Profile(props) {
     profile,
     profileLoading,
     profileAppErr,
+    followed,
+    unFollowed,
     profileServerErr,
     userAuth,
   } = users;
@@ -31,7 +37,7 @@ export default function Profile(props) {
   //fetch user profile
   useEffect(() => {
     dispatch(userProfileAction(id));
-  }, [id, dispatch]);
+  }, [id, dispatch, followed, unFollowed]);
 
   //isLogin
   const isLoginUser = userAuth?._id === profile?._id;
@@ -132,7 +138,9 @@ export default function Profile(props) {
                                 <div>
                                   {profile?.isFollowing ? (
                                     <button
-                                      
+                                      onClick={() =>
+                                        dispatch(unfollowUserAction(id))
+                                      }
                                       className="mr-2 inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
                                     >
                                       <EmojiSadIcon
@@ -143,7 +151,9 @@ export default function Profile(props) {
                                     </button>
                                   ) : (
                                     <button
-                                      
+                                      onClick={() =>
+                                        dispatch(followUserAction(id))
+                                      }
                                       type="button"
                                       className="inline-flex justify-center px-4 py-2 border border-gray-300 shadow-sm text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
                                     >
@@ -178,10 +188,7 @@ export default function Profile(props) {
                                 )}
                               </>
                               {/* Send Mail */}
-                              <button
-                                
-                                className="inline-flex justify-center bg-indigo-900 px-4 py-2 border border-yellow-700 shadow-sm text-sm font-medium rounded-md text-gray-700  hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500"
-                              >
+                              <button className="inline-flex justify-center bg-indigo-900 px-4 py-2 border border-yellow-700 shadow-sm text-sm font-medium rounded-md text-gray-700  hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500">
                                 <MailIcon
                                   className="-ml-1 mr-2 h-5 w-5 text-gray-200"
                                   aria-hidden="true"
